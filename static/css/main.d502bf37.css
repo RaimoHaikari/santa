@@ -1,0 +1,2 @@
+G.santa-pixels rect{stroke:#ccd0e3;stroke-width:1;stroke-opacity:.1}G.santa-hits rect{fill:none;stroke:#ccd0e3;stroke-width:1;stroke-opacity:.8}G.santa-pixels rect.printed{fill:#999ea7}G.arms line{stroke:blue;fill:purple;fill-opacity:.5;stroke-opacity:.8;stroke-width:3}.even-columns{grid-gap:1rem;display:grid;gap:1rem;outline:1px solid navy}@media (min-width:50em){.even-columns{grid-auto-columns:1fr;grid-auto-flow:column;outline:1px solid navy}}
+/*# sourceMappingURL=main.d502bf37.css.map*/
