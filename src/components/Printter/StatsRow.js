@@ -33,7 +33,7 @@ const StatsRow = ({index, margins, pixels, pixelWidth}) => {
                             x = {pixelWidth * i}
                             y = {0}
                             pixelWidth = { pixelWidth }
-                            value = {pixel[0] / 2}
+                            value = {pixel[0]}
                         />
                     </g>
                 )

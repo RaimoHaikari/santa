@@ -1,8 +1,16 @@
 import { useEffect } from "react";
+import { 
+    faForwardStep,
+    faPlay,
+    faStop,
+    faArrowLeftRotate
+} from "@fortawesome/free-solid-svg-icons";
 
 import { useData } from "../../hooks/useData";
 import { useImage } from "../../hooks/useImage";
-import { useTimer } from "../../hooks/useTimer"
+import { useTimer } from "../../hooks/useTimer";
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Canvas from "./Canvas";
 import Hits from "./Hits";
@@ -128,19 +136,29 @@ const Printter = () => {
             ? false
             : stepEnabled() === false
                 ? true
-                : false
+                : false;
+
+        const runButtonDisabled = timerFinished() === true
+            ? true
+            : false;
 
         return (
-            <div>
+            <div className="container">
+
+                
+
                 <button
                     onClick={() => step()}
                     disabled = { stepEnabled() === false }
-                >S.T.E.P</button>
+                    className="action-button"
+                >
+                    <FontAwesomeIcon  icon={faForwardStep} />
+                </button>
 
                 {
                     stepEnabled() === true 
-                    ? <button onClick={() => startTimer()}>S.T.A.R.T</button>
-                    : <button onClick={() => stopTimer()}>S.T.O.P</button>
+                    ? <button disabled = { runButtonDisabled } className="action-button" onClick={() => startTimer()}><FontAwesomeIcon  icon={faPlay} /></button>
+                    : <button disabled = { runButtonDisabled } className="action-button" onClick={() => stopTimer()}><FontAwesomeIcon  icon={faStop} /></button>
                 }
 
 
@@ -149,11 +167,14 @@ const Printter = () => {
                 <button 
                     onClick={() => resetHandler()}
                     disabled = { resetButtonDisabled }
-                >R.E.S.E.T</button>
+                    className="action-button"
+                >
+                    <FontAwesomeIcon  icon={faArrowLeftRotate} />
+                </button>
 
 
 
-                <span>::{timerFinished() === true?"MAALISSA":"MATKALLA"}::</span>
+                <span className="margin-left with-letter-spacing fw-bold">{`Step: ${index} / ${data.length-1}`}</span>
 
                 <div className="even-columns">
 
@@ -177,6 +198,7 @@ const Printter = () => {
             </div>
         )
     }
+
 
     return (
         <>
