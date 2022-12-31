@@ -6,7 +6,7 @@ G.santa-pixels rect {
   /* fill: none; */
   stroke: rgb(204, 208, 227);
   stroke-width: 1;
-  stroke-opacity: 0.1;
+  stroke-opacity: 0.8;
 }
 
 G.santa-hits rect {
@@ -128,12 +128,36 @@ p:not([class]) {
   /* align-items: center; */
 }
 
+/*
+ * Pisteiden alustuksen valinta
+ */
+
+.menu-bar {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: var(--size-200);
+  margin-left: 0;
+  margin-bottom: var(--size-200);
+  margin-right: 0;
+
+}
+
 @media (min-width: 50em) {
 
   .nav-wrapper {
     flex-direction: row;
     align-items: center;
   }
+
+  .menu-bar {
+    flex-direction: row;
+  }
+  
+  .menu-bar > div {
+    margin-right: var(--size-200);
+  }
+  
 }
 
 .container {
@@ -220,6 +244,7 @@ p:not([class]) {
   display: grid;
   gap: 1rem;
 }
+
 
 @media (min-width: 50em){
 

@@ -10,14 +10,16 @@ import { useData } from "../../hooks/useData";
 import { useImage } from "../../hooks/useImage";
 import { useTimer } from "../../hooks/useTimer";
 
+import { useCombinations } from "../../hooks/useCombinations";
+import { useNeighbors } from "../../hooks/useNeighbors"
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import Canvas from "./Canvas";
 import Hits from "./Hits";
 
 import { colors } from "../../misc/colors_9_times_9"
-
-const baseline = 'https://raw.githubusercontent.com/RaimoHaikari/tahtisadetta/main/Misc/9_9_baseline.csv';
+//import { colors } from "../../misc/colors_33_times_33";
 
 
 const base = [0,0];
@@ -31,9 +33,12 @@ const margins = {
     right: 10
 }
 
-const Printter = () => {
+const Printter = ({moves}) => {
 
-    const { data, loading } = useData(baseline);
+    const { data, loading, setUrl } = useData();
+
+    const { combinations, setDepth } = useCombinations();
+    const { getNeighbors, setCombinations } = useNeighbors();
 
     const { 
         index, 
@@ -47,7 +52,9 @@ const Printter = () => {
     } = useTimer();
 
 
-
+    /*
+     * Maalattavan kuvan kooon asetus!
+     */
     const { 
         image,
         resetHits,
@@ -55,10 +62,31 @@ const Printter = () => {
     } = useImage(9);
 
     useEffect(() => {
+
+        resetHits()
+        reset()
+        setUrl(moves)
+        
+    }, [moves])
+
+    useEffect(() => {
         if(data !== null){
+
             setLength(data.length)
+            setDepth(data[0].length)
+
         }
     }, [data])
+
+    useEffect(() => {
+
+        if(combinations.length === 0){
+            return 
+        }
+
+        setCombinations(combinations);
+
+    },[combinations])
 
     /*
      * Convert cartesian coordinates to array indexes
@@ -121,6 +149,38 @@ const Printter = () => {
         return val;
     }
 
+    const getConfigurationEndPoints = () => {
+
+        const neighbors = getNeighbors(data[index]);
+        //console.log(neighbors)
+
+        let val = neighbors.map((n,i) => {
+
+            let x = base[0];
+            let y = base[1];
+
+            n.forEach((a,j) => {
+                x = x + a[0]
+                y = y + a[1]
+
+                // console.log("...", j, a[0], a[1], x, y)
+            })
+
+            // console.log(".", x, y)
+
+            let p = cartesian_to_array(x,y, image.current.length);
+
+            return {
+                r: p[0],
+                c: p[1]
+            }
+
+        })
+
+        return val
+
+    }
+
     const resetHandler = () => {
         
         resetHits()
@@ -131,6 +191,7 @@ const Printter = () => {
     const displayLayout = () => {
 
         const arms = getArms();
+        const confEndPoints = getConfigurationEndPoints();
 
         const resetButtonDisabled = timerFinished() === true
             ? false
@@ -184,6 +245,7 @@ const Printter = () => {
                         pixelWidth = { pixelWidth }
                         margins = { margins }
                         arms = {arms}
+                        neighborhood = {confEndPoints}
                     />
 
                     <Hits 

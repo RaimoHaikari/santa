@@ -3,9 +3,7 @@ import { useState, useEffect } from "react";
 /*
  * Fetch Kaggle Santa 2022 submission file from Github repo
  */
-export const useData = () => {
-
-    const [url, setUrl] = useState(null)
+export const useData = (url) => {
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -70,18 +68,12 @@ export const useData = () => {
     }
 
     useEffect(() => {
-
-        if(url !== null){
-            console.log("Voisi hakea aineiston");
-            fetchData();
-        }
-            
-    }, [url]); 
+        fetchData();
+    }, []); 
 
     return {
         data,
-        loading,
-        setUrl
+        loading
     };
 
 }

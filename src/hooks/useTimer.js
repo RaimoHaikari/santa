@@ -62,7 +62,6 @@ export const useTimer = () => {
         if (hasTimerEnded) {
             clearInterval(intervalID)
             setIntervalID(null)
-            console.log("Valmista tuli!")
         }
 
     }, [hasTimerEnded])

@@ -6,7 +6,7 @@ const Header = () => {
             <div className="container">
                 <div className="nav-wrapper">
                     <SiteLogo />
-                    <h1 className="fs-primary-heading">Kaggle Santa 2022 Baseline Visualization</h1>
+                    <h1 className="fs-primary-heading">Santa's Little Printer</h1>
                 </div>
             </div>
         </header>

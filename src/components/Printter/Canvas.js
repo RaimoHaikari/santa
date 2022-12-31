@@ -1,8 +1,9 @@
 import Row from "./Row";
 import Arms from "./Arms";
+import Neighborhood from "./Neighborhood";
 
 
-const Canvas = ({arms, colors, image, margins, pixelWidth}) => {
+const Canvas = ({arms, colors, image, margins, neighborhood, pixelWidth}) => {
 
 
     const width = margins.left + (image[0].length * pixelWidth) + margins.right;
@@ -13,6 +14,8 @@ const Canvas = ({arms, colors, image, margins, pixelWidth}) => {
      */
     return (
         <svg viewBox={`0 0 ${width} ${height}`}>
+
+
         {
             image.map((r,i) => {
 
@@ -36,6 +39,13 @@ const Canvas = ({arms, colors, image, margins, pixelWidth}) => {
             arms = { arms }
             margins = { margins }
         />
+
+        <Neighborhood 
+            neighborhood = { neighborhood }
+            margins = { margins }
+            pixelWidth= { pixelWidth }
+        />
+
         </svg>
     );
 };
